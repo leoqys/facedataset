@@ -1,2 +1,78 @@
-# facedataset
-create a meaningful dataset to help understanding of face recognition algorithms
+
+The objective of this project is to create a meaningful dataset to help understanding of face recognition algorithms
+There are two ways of using the benchmarker. 
+
+
+Method 1: The benchmarker passes data by calling the functions from the algorithm file.
+		
+		The functions required by the algorithm are:
+			- trainAlgo(imageArr, labelArr, DIR_NAME)
+					This method is used to collect the entire training data with label names. It is used to train the algorithm.
+					
+				    Parameters: imageArr - A list of images (each as numpy array)
+								labelArr - A list of label names (Associated with imageArr)
+								DIR_NAME - Name of Dataset Folder (This is for algorithms to know which dataset it is using. This is optional for algorithms if they want to use this parameter for processing.)
+
+			- testAlgo(image, DIR_NAME)
+					This function is for the benchmarker to test the algorithm. The benchmarker will repeatedly challenge the algorithm by calling this function. A return of the identity name should be returned to the benchmarker.
+					
+					Parameters: image - a single image(In numpy array)
+								DIR_NAME - Name of the Dataset Folder
+								
+					Expected Returns: Label name of the image.
+
+		The user need to execute benchmarker.py and input the algorithm filename (without .py). The user will than need to have the above 2 functions for training and testing the algorithm.
+
+
+		
+Method 2: Algorithm to call the benchmarker to request for data for training and testing.
+
+			The functions are to be called for training and testing:
+				- fetchTrainingData(DS_DIR)
+						This function is to request for training set from the benchmarker.
+						
+						Parameters: DS_DIR - Name of Dataset Folder (required for benchmarker to know which Dataset to use.)
+						
+						Returns: imageArr - A list of images (each as numpy array) 
+								 labelArr - A list of label names (Associated with imageArr)
+								 DS_DIR - Name of Dataset Folder
+								 
+				- fetchTestQuestion()
+						This function is to request for testing dataset from the benchmarker. The function needs to be executed after fetchTrainingData(DS_DIR).
+						
+						Returns: test_set - A list of images (each as numpy array)
+						
+				- submitAnswer(ansArr)
+						This function is to submit answer of to the test questions and the benchmarker will compare with its answer sheet. This function have to be called after fetchTestQuestion()
+						
+						Parameters: ansArr - A list of label names associated with the array from fetchTestQuestion()
+		
+		
+			The user have to add this 3 functions in to the algorithm to test the performance of algorithm of different Dataset. 
+		
+
+		
+		
+********************************************************* DATASETS ************************************************************************************		
+		
+	There are currently 4 Datasets available. Currently, Datasets are a subset of FaceScrub Dataset.
+	
+	Dataset 1:
+	This Dataset consist of images with single face extracted using Haar Cascade/Viola Jones Detection algorithm. It consist of 6,020 images with 50 identities. 
+	By default, 50 images will be used for training and 10 images for testing per identity. 47 of the 50 identities will have sufficient images for benchmarking.
+	The number of images for training and testing can be adjusted be regenerating the dataset using TrainTest_Generator.py.
+	
+	Dataset 2:
+	This Dataset consist of images with single face extracted using Deep Learning detection (One-Shot Detector). It consist of 6,925 images with 50 identities.
+	Similarly, 50 images will be used for training and 10 images for testing per identity. 49 of 50 identities will have sufficient images for benchmarking.
+	
+	Dataset 3:
+	This dataset consist of images of single frontal face with consistent lighting throughout the entire face. Faces are not covered by any objects and is consisted "Clean Face".
+	This dataset includes 10 males and 10 females with at least 50 images for each identity with 1,310 images in total. 40 images and 10 images will be used for training and testing respectively.
+	
+	Dataset 4:
+	This dataset consist of 2,465 images with people with darker skin tone. This is because facial recognition algorithms have trouble detecting faces for with darker skin tone. 
+	50 images and 10 images are used for training and testing respectively with 21 identities. 
+
+ ******* The dataset is still building in progress. More data is needed. *******
+ 
