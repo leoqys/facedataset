@@ -53,7 +53,9 @@ Method 2: Algorithm to call the benchmarker to request for data for training and
 		
 			The user have to add this 3 functions in to the algorithm to test the performance of algorithm of different Dataset. 
 		
-			!!!!! Instruction for Dataset 5
+		
+		
+			!!!!! Instruction for Dataset 5 !!!!!!
 			Dataset 5 consist of 2 training phase and 3 test phase. The purpose of Dataset 5 is listed under DATASETS.
 			The steps to call and train dataset 5 is as followed.
 			
@@ -64,6 +66,9 @@ Method 2: Algorithm to call the benchmarker to request for data for training and
 			The first set of <<fetchTrainingData(DS_DIR) -> fetchTestQuestion() -> submitAnswer(ansArr)>> is to test the algorithm when detecting pure faces. 
 			The 2nd fetchTrainingData(DS_DIR) is to train the algorithm with different angle of faces.
 			the 2nd and 3rd fetchTestQuestion is to test the algorithm with the respective purpose of the dataset.
+			
+			
+			
 ********************************************************* DATASETS ************************************************************************************		
 		
 	There are currently 4 Datasets available. Currently, Datasets are a subset of FaceScrub Dataset.
