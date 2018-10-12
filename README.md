@@ -46,13 +46,24 @@ Method 2: Algorithm to call the benchmarker to request for data for training and
 						This function is to submit answer of to the test questions and the benchmarker will compare with its answer sheet. This function have to be called after fetchTestQuestion()
 						
 						Parameters: ansArr - A list of label names associated with the array from fetchTestQuestion()
-		
+						
+						Returns: correctAns - Number of correct recognition
+								 wrongAns - Number of wrong recognition
+								 acc - Accuracy
 		
 			The user have to add this 3 functions in to the algorithm to test the performance of algorithm of different Dataset. 
 		
-
+			!!!!! Instruction for Dataset 5
+			Dataset 5 consist of 2 training phase and 3 test phase. The purpose of Dataset 5 is listed under DATASETS.
+			The steps to call and train dataset 5 is as followed.
+			
+			fetchTrainingData(DS_DIR) -> fetchTestQuestion() -> submitAnswer(ansArr) -> 
+			fetchTrainingData(DS_DIR) -> fetchTestQuestion() -> submitAnswer(ansArr) ->
+			fetchTestQuestion() -> submitAnswer(ansArr)
 		
-		
+			The first set of <<fetchTrainingData(DS_DIR) -> fetchTestQuestion() -> submitAnswer(ansArr)>> is to test the algorithm when detecting pure faces. 
+			The 2nd fetchTrainingData(DS_DIR) is to train the algorithm with different angle of faces.
+			the 2nd and 3rd fetchTestQuestion is to test the algorithm with the respective purpose of the dataset.
 ********************************************************* DATASETS ************************************************************************************		
 		
 	There are currently 4 Datasets available. Currently, Datasets are a subset of FaceScrub Dataset.
@@ -74,5 +85,12 @@ Method 2: Algorithm to call the benchmarker to request for data for training and
 	This dataset consist of 2,465 images with people with darker skin tone. This is because facial recognition algorithms have trouble detecting faces for with darker skin tone. 
 	50 images and 10 images are used for training and testing respectively with 21 identities. 
 
+	Dataset 5:
+	This dataset consist of 3 test and 2 training sets. The first training set is of pure faces and it consist of 800 training image. This first trainingset if for the first test. It is to test the performance of 
+	algorithm when recognising "pure" faces. 
+	The 2nd training set is for test 2 and test 3. Training set 2 consist of 1000 training images with faces of different angle. Test set 2 is to test the performance of algorithms when detecting different angle of faces
+	while test set 3 is for performance of different lighting.
+	
+	
  ******* The dataset is still building in progress. More data is needed. *******
  

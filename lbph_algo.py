@@ -118,18 +118,77 @@ def main():
         spam_info = imp.find_module(pythonFile)
         print("Import Benchmark successful")
 
-        DS_DIR = "Dataset 4"
-        imageArr, labelArr, DS_DIR = bm.fetchTrainingData(DS_DIR)
+
+        ######## Dataset 1-4###################
+
+        # DS_DIR = "Dataset 4"
+        # imageArr, labelArr, DS_DIR = bm.fetchTrainingData(DS_DIR)
+        # print("Run Successful")
+        # trainAlgo(imageArr, labelArr, DS_DIR)
+        #
+        # imgArr = bm.fetchTestQuestion()
+        # #print(len(imgArr))
+        # for i in range(len(imgArr)):
+        #     name = testAlgo(imgArr[i], DS_DIR)
+        #     nameList.append(name)
+        #
+        # bm.submitAnswer(nameList)
+
+
+        ########## Dataset 5 ######################
+
+        DS_DIR = "Dataset 5"
+        imageArr, labelArr, DS = bm.fetchTrainingData(DS_DIR)
         print("Run Successful")
-        trainAlgo(imageArr, labelArr, DS_DIR)
+        trainAlgo(imageArr, labelArr, DS)
 
         imgArr = bm.fetchTestQuestion()
         #print(len(imgArr))
         for i in range(len(imgArr)):
-            name = testAlgo(imgArr[i], DS_DIR)
+            name = testAlgo(imgArr[i], DS)
             nameList.append(name)
 
-        bm.submitAnswer(nameList)
+        correctAns1, wrongAns1, acc1 = bm.submitAnswer(nameList)
+        nameList.clear()
+        ### Training for Mixed Training
+        imageArr2, labelArr2, DS_DIR2 = bm.fetchTrainingData(DS_DIR)
+        print("Run Successful 2")
+
+        trainAlgo(imageArr2, labelArr2, DS_DIR2+"2")# +"2" is to save the file under different name. If u want to replace the previous file, you need not +"2"
+        ### Fetching 2nd test - Angle
+        imgArr2 = bm.fetchTestQuestion()
+
+        for i in range(len(imgArr)):
+            name = testAlgo(imgArr2[i], DS_DIR2+"2")
+            nameList.append(name)
+
+        correctAns2, wrongAns2, acc2 = bm.submitAnswer(nameList)
+        nameList.clear()
+        ### Fetching 3rd Test - Lighting
+        imgArr3 = bm.fetchTestQuestion()
+        # print(len(imgArr))
+        for i in range(len(imgArr3)):
+            name = testAlgo(imgArr3[i], DS_DIR2+"2")
+            nameList.append(name)
+
+        correctAns3, wrongAns3, acc3 = bm.submitAnswer(nameList)
+        nameList.clear()
+        print("================= Test 1 (Pure Faces) Results ========================")
+        print ("No of correct answer: " + str(correctAns1))
+        print ("No of wrong answer: " + str(wrongAns1))
+        print ("Accuracy: " + str(acc1))
+
+        print("")
+        print("============= Test 2 (Faces of different angle) Results ==============")
+        print ("No of correct answer: " + str(correctAns2))
+        print ("No of wrong answer: " + str(wrongAns2))
+        print ("Accuracy: " + str(acc2))
+
+        print("")
+        print("============= Test 3 (Faces of different lighting) Results ==============")
+        print ("No of correct answer: " + str(correctAns3))
+        print ("No of wrong answer: " + str(wrongAns3))
+        print ("Accuracy: " + str(acc3))
 
     except Exception as e:
         print (e)
